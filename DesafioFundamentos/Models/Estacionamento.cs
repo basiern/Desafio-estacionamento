@@ -4,6 +4,7 @@ namespace DesafioFundamentos.Models
     {
         private decimal precoInicial = 0;
         private decimal precoPorHora = 0;
+        private int vagas = 50;
         private List<string> veiculos = new List<string>();
 
         public Estacionamento(decimal precoInicial, decimal precoPorHora)
@@ -14,11 +15,19 @@ namespace DesafioFundamentos.Models
 
         public void AdicionarVeiculo()
         {     
-            Console.WriteLine("Digite a placa do veículo para estacionar:");
-            string placa = "";
-            placa = Console.ReadLine();
-            veiculos.Add(placa);
-            Console.WriteLine($"O veículo {placa} foi estacionado com sucesso!");      
+            if (vagas > 0)
+            {
+                Console.WriteLine("Digite a placa do veículo para estacionar:");
+                string placa = "";
+                placa = Console.ReadLine();
+                veiculos.Add(placa);
+                Console.WriteLine($"O veículo {placa} foi estacionado com sucesso!"); 
+                vagas -= 1;
+                Console.WriteLine($"Vagas restantes: {vagas}");
+            } else {
+                Console.WriteLine("O estacionamento está cheio.");
+            }
+                           
         }
 
         public void RemoverVeiculo()
@@ -39,6 +48,7 @@ namespace DesafioFundamentos.Models
                 veiculos.Remove(placa);
 
                 Console.WriteLine($"O veículo {placa} foi removido e o preço total foi de: R$ {valorTotal}");
+                vagas += 1;
             }
             else
             {
